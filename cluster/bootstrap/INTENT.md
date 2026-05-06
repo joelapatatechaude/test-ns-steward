@@ -1,1 +1,1 @@
-- install the latest version of the gitwebhook operator. Disable auto update for that operator
+- install the latest version of the nfd operator. Disable auto update for that operator
