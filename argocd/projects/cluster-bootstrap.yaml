@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cluster-bootstrap
+  namespace: openshift-gitops
+spec:
+  description: Essential cluster-scoped resources (CRDs, base operators, core config)
+  sourceRepos:
+    - https://github.com/joelapatatechaude/test-ns-steward.git
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
