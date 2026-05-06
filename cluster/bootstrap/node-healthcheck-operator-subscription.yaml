@@ -1,11 +1,11 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: nfd
-  namespace: openshift-nfd
+  name: node-healthcheck-operator
+  namespace: openshift-operators
 spec:
   channel: stable
-  name: nfd
+  name: node-healthcheck-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   installPlanApproval: Automatic
