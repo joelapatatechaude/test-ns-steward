@@ -1,0 +1,1 @@
+- install the latest version of the gitwebhook operator. Disable auto update for that operator

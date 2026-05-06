@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: gitwebhook-operator
+  namespace: openshift-operators
+spec:
+  channel: alpha
+  name: gitwebhook-operator
+  source: community-operators
+  sourceNamespace: openshift-marketplace
+  installPlanApproval: Manual
+  startingCSV: gitwebhook-operator.v0.1.2
