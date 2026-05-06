@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pacman
+  namespace: steward-pacman
+  labels:
+    app.kubernetes.io/name: pacman
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: steward
+spec:
+  host: pacman.apps.hh.cszevaco.com
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: pacman
+    weight: 100

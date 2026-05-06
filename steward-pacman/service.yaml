@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pacman
+  namespace: steward-pacman
+  labels:
+    app.kubernetes.io/name: pacman
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: steward
+spec:
+  selector:
+    app.kubernetes.io/name: pacman
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP

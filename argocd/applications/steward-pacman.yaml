@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: steward-pacman
+  namespace: openshift-gitops
+spec:
+  project: steward-pacman
+  source:
+    repoURL: https://github.com/joelapatatechaude/test-ns-steward.git
+    targetRevision: HEAD
+    path: steward-pacman
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: steward-pacman
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
