@@ -8,5 +8,4 @@ spec:
   name: gitwebhook-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
-  installPlanApproval: Manual
-  startingCSV: gitwebhook-operator.v0.1.2
+  installPlanApproval: Automatic
