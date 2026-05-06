@@ -1,1 +1,1 @@
-- install the latest version of the Node Health Check Operator operator, leave auto update on.
+
