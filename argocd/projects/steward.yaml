@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: steward
+  namespace: openshift-gitops
+spec:
+  description: Steward-managed namespaces
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: steward-*
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace

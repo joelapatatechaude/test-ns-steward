@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: steward-postgres
+  labels:
+    app.kubernetes.io/name: database
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/part-of: steward
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: database
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: database
+        app.kubernetes.io/component: postgresql
+        app.kubernetes.io/part-of: steward
+    spec:
+      containers:
+        - name: postgresql
+          image: registry.redhat.io/rhel9/postgresql-15:latest
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRESQL_USER
+              value: steward
+            - name: POSTGRESQL_PASSWORD
+              value: changeme
+            - name: POSTGRESQL_DATABASE
+              value: steward
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/pgsql/data
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /usr/libexec/check-container
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: database
